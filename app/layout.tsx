@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./interactions.css";
+import "./chat.css";
+import "./overlays.css";
+import "./themes.css";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -13,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shuf — Play the show",
+  title: "Shuf — Play, match and talk",
   description:
-    "A polished interactive entertainment experience inspired by social matchmaking, live reactions and audience-led games.",
+    "A polished interactive entertainment experience with social games, matchmaking, audience reactions and modern local-first messaging.",
   applicationName: "Shuf",
   appleWebApp: {
     capable: true,
