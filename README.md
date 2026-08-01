@@ -1,14 +1,21 @@
 # Shuf
 
-Shuf is an interactive entertainment app that turns social matchmaking and audience-panel formats into polished, playable experiences.
+Shuf is an interactive social entertainment app that turns matchmaking and audience-panel formats into polished, playable experiences.
 
 ## Experiences
 
 - **Pop the Balloon** — eliminate five hidden personalities and reveal the final match.
 - **Blind Match** — answer four instinctive questions and receive a compatibility result.
 - **The Panel** — judge five date stories and discover your panel personality.
-- **Discover** — browse trending people, topics and audience debates.
+- **Messages** — local-first conversations with search, unread states, reactions, emoji, attachments, voice notes, call overlays and conversation controls.
+- **Discover** — search people, follow profiles, filter personalities and join community topics.
 - **Progression** — earn Shuf points, build streaks and unlock achievements.
+
+## Interaction coverage
+
+Every visible control is connected to a real frontend behavior: navigation, game state, search, filters, polls, likes, sharing, following, bookmarks, notifications, settings, achievements, messaging or persisted preferences.
+
+The current chat implementation is local-first and persists in the browser through `localStorage`. It is ready to be connected to a realtime database and authentication layer for production multi-user messaging.
 
 ## Stack
 
@@ -33,5 +40,3 @@ Open `http://localhost:3000`.
 npm run lint
 npm run build
 ```
-
-The original single-file HTML prototype was used as the product seed and fully re-architected as a responsive Next.js application.
