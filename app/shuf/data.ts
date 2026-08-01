@@ -1,10 +1,19 @@
 import { Activity, CircleUserRound, Clock3, Compass, Flame, Gamepad2, Heart, Home, Laugh, MessageCircleHeart, MessageSquare, MoonStar, PartyPopper, ShieldCheck, Sparkles, Star, Swords, Target, Trophy, Users, WandSparkles } from "lucide-react";
 
-export type View = "home" | "play" | "discover" | "chat" | "activity" | "profile";
+export type View = "home" | "circles" | "play" | "discover" | "chat" | "activity" | "profile";
 export type Game = "balloon" | "blind" | "panel" | null;
 export type Flag = "green" | "red" | "wild";
 export type ModalName = "notifications" | "settings" | "about" | "achievements" | "new-chat" | "search" | null;
 export type ThemeMode = "system" | "dark" | "light";
+export type FeedLanguage = "all" | "am" | "om" | "ti" | "en";
+export type ShufSettings = {
+  theme: ThemeMode;
+  sound: boolean;
+  motion: boolean;
+  messagePreview: boolean;
+  lowData: boolean;
+  language: FeedLanguage;
+};
 
 export type Suitor = {
   name: string;
@@ -53,14 +62,15 @@ export type NotificationItem = {
 
 export const navItems: { id: View; label: string; icon: typeof Home }[] = [
   { id: "home", label: "Home", icon: Home },
-  { id: "play", label: "Play", icon: Gamepad2 },
+  { id: "circles", label: "Circles", icon: Users },
   { id: "discover", label: "Discover", icon: Compass },
+  { id: "play", label: "Shuf Games", icon: Gamepad2 },
   { id: "chat", label: "Messages", icon: MessageSquare },
   { id: "activity", label: "Activity", icon: Activity },
   { id: "profile", label: "Profile", icon: CircleUserRound },
 ];
 
-export const bottomNavItems = navItems.filter((item) => item.id !== "activity");
+export const bottomNavItems = navItems.filter((item) => ["home", "circles", "chat", "profile"].includes(item.id));
 
 export const suitors: Suitor[] = [
   { name: "Nardos", age: 26, job: "Creative strategist", trait: "Sings karaoke every Friday. No exceptions.", bio: "Creative by day, karaoke legend by night. She says yes to spontaneous road trips and remembers every tiny detail.", flag: "green", interests: ["Music", "Road trips", "Design"], initials: "NA" },
@@ -95,14 +105,14 @@ export const stories = [
 export const initialActivity = [
   { id: "a1", icon: Trophy, title: "New panel rank", text: "You reached Sharp Observer", time: "12 min", tone: "gold", read: false, target: "profile" as View },
   { id: "a2", icon: Heart, title: "Compatibility saved", text: "Your 91% match with Hana", time: "2 hr", tone: "pink", read: false, target: "chat" as View },
-  { id: "a3", icon: Flame, title: "Streak extended", text: "You played three days in a row", time: "Yesterday", tone: "orange", read: false, target: "play" as View },
-  { id: "a4", icon: Users, title: "Community result", text: "8,412 players judged the same story", time: "Yesterday", tone: "violet", read: true, target: "discover" as View },
+  { id: "a3", icon: Flame, title: "Circle invitation", text: "Ethiopian Tech Builders invited you to a room", time: "Yesterday", tone: "orange", read: false, target: "circles" as View },
+  { id: "a4", icon: Users, title: "Community result", text: "8,412 people joined the same discussion", time: "Yesterday", tone: "violet", read: true, target: "home" as View },
 ];
 
 export const initialNotifications: NotificationItem[] = [
   { id: "n1", title: "Hana replied", text: "That rooftop idea actually sounds perfect.", time: "2m", read: false, icon: "message" },
-  { id: "n2", title: "New match signal", text: "Your latest Blind Match reached 91% compatibility.", time: "1h", read: false, icon: "match" },
-  { id: "n3", title: "Weekend quest", text: "Complete The Panel to unlock No Mercy.", time: "4h", read: false, icon: "trophy" },
+  { id: "n2", title: "Oromia Creators is live", text: "A multilingual creator audio room just started.", time: "18m", read: false, icon: "community" },
+  { id: "n3", title: "New match signal", text: "Your latest Blind Match reached 91% compatibility.", time: "1h", read: false, icon: "match" },
   { id: "n4", title: "Community pulse", text: "Your verdict is now in the top 18% most discussed.", time: "1d", read: true, icon: "community" },
 ];
 
