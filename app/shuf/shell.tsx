@@ -1,12 +1,12 @@
 import {
-  ArrowLeft, ArrowRight, Bell, ChevronRight, Crown, Info, Menu, Search, Settings, X,
+  ArrowLeft, ArrowRight, Bell, ChevronRight, Crown, Info, Menu, Plus, Search, Settings, Sparkles, X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { Game, View, bottomNavItems, navItems } from "./data";
 import { Avatar, Logo, cn } from "./ui";
 
 export function AppHeader({
-  view, game, unreadNotifications, onBack, onMenu, onSearch, onNotifications, onProfile,
+  view, game, unreadNotifications, onBack, onMenu, onSearch, onNotifications, onProfile, onCreate,
 }: {
   view: View;
   game: Game;
@@ -16,10 +16,11 @@ export function AppHeader({
   onSearch: () => void;
   onNotifications: () => void;
   onProfile: () => void;
+  onCreate: () => void;
 }) {
   const title = game
     ? game === "balloon" ? "Pop the Balloon" : game === "blind" ? "Blind Match" : "The Panel"
-    : view === "home" ? "Tonight on Shuf" : navItems.find((item) => item.id === view)?.label;
+    : view === "home" ? "Ethiopia on Shuf" : navItems.find((item) => item.id === view)?.label;
   return (
     <header className="topbar">
       <div className="topbar-left">
@@ -29,12 +30,13 @@ export function AppHeader({
         <button className="desktop-brand desktop-only sidebar-logo-button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Back to top">
           <Logo /><span>SHUF</span>
         </button>
-        <div><p className="topbar-kicker">{game ? "Interactive mode" : "Live social entertainment"}</p><h1>{title}</h1></div>
+        <div><p className="topbar-kicker">{game ? "Interactive mode" : "Ethiopia's social home"}</p><h1>{title}</h1></div>
       </div>
       <div className="topbar-actions">
         <button className="desktop-only search-field interactive-search" onClick={onSearch} aria-label="Search Shuf">
-          <Search size={17} /><span>Search Shuf</span><kbd>⌘ K</kbd>
+          <Search size={17} /><span>Search people, Circles and posts</span><kbd>⌘ K</kbd>
         </button>
+        <button className="topbar-create desktop-only" onClick={onCreate}><Plus size={16} />Create</button>
         <button className="icon-button" onClick={onNotifications} aria-label="Notifications">
           <Bell size={19} />{unreadNotifications ? <><span className="notification-dot" /><span className="sr-only">{unreadNotifications} unread notifications</span></> : null}
         </button>
@@ -45,18 +47,20 @@ export function AppHeader({
 }
 
 export function Sidebar({
-  view, unreadMessages, onNavigate, onSettings, onAbout, onAchievements,
+  view, unreadMessages, onNavigate, onCreate, onSettings, onAbout, onAchievements,
 }: {
   view: View;
   unreadMessages: number;
   onNavigate: (view: View) => void;
+  onCreate: () => void;
   onSettings: () => void;
   onAbout: () => void;
   onAchievements: () => void;
 }) {
   return (
     <aside className="sidebar desktop-only">
-      <button className="sidebar-logo sidebar-logo-button" onClick={() => onNavigate("home")}><Logo /><div><strong>SHUF</strong><span>Play. Match. Talk.</span></div></button>
+      <button className="sidebar-logo sidebar-logo-button" onClick={() => onNavigate("home")}><Logo /><div><strong>SHUF</strong><span>Talk. Connect. Belong.</span></div></button>
+      <button className="sidebar-create-button" onClick={onCreate}><Plus size={18} /><span>Create on Shuf</span><Sparkles size={14} /></button>
       <nav className="side-nav">
         {navItems.map(({ id, label, icon: Icon }) => (
           <button key={id} className={cn("side-link", view === id && "active")} onClick={() => onNavigate(id)}>
@@ -66,7 +70,7 @@ export function Sidebar({
         ))}
       </nav>
       <button className="sidebar-quest sidebar-quest-button" onClick={onAchievements}>
-        <span className="quest-icon"><Crown size={20} /></span><p>Weekend quest</p><strong>Play all 3 modes</strong><div className="mini-progress"><span style={{ width: "66%" }} /></div><small>2 of 3 completed</small>
+        <span className="quest-icon"><Crown size={20} /></span><p>Community reputation</p><strong>Trusted contributor</strong><div className="mini-progress"><span style={{ width: "72%" }} /></div><small>3 thoughtful posts to next badge</small>
       </button>
       <div className="sidebar-bottom">
         <button className="side-link" onClick={onSettings}><Settings size={20} /><span>Settings</span></button>
@@ -76,26 +80,31 @@ export function Sidebar({
   );
 }
 
-export function BottomNav({ view, unreadMessages, onNavigate }: { view: View; unreadMessages: number; onNavigate: (view: View) => void }) {
+export function BottomNav({ view, unreadMessages, onNavigate, onCreate }: { view: View; unreadMessages: number; onNavigate: (view: View) => void; onCreate: () => void }) {
+  const [home, circles, chat, profile] = bottomNavItems;
+  const renderItem = ({ id, label, icon: Icon }: (typeof bottomNavItems)[number]) => (
+    <button key={id} className={cn(view === id && "active")} onClick={() => onNavigate(id)}>
+      <span><Icon size={21} strokeWidth={view === id ? 2.5 : 1.9} />{id === "chat" && unreadMessages ? <i className="nav-badge">{unreadMessages}</i> : null}</span><small>{label}</small>
+    </button>
+  );
   return (
-    <nav className="bottom-nav mobile-only">
-      {bottomNavItems.map(({ id, label, icon: Icon }) => (
-        <button key={id} className={cn(view === id && "active")} onClick={() => onNavigate(id)}>
-          <span><Icon size={21} strokeWidth={view === id ? 2.5 : 1.9} />{id === "chat" && unreadMessages ? <i className="nav-badge">{unreadMessages}</i> : null}</span><small>{label}</small>
-        </button>
-      ))}
+    <nav className="bottom-nav social-bottom-nav mobile-only">
+      {renderItem(home)}{renderItem(circles)}
+      <button className="mobile-create-button" onClick={onCreate} aria-label="Create on Shuf"><span><Plus size={25} /></span><small>Create</small></button>
+      {renderItem(chat)}{renderItem(profile)}
     </nav>
   );
 }
 
 export function MobileDrawer({
-  open, view, unreadMessages, onClose, onNavigate, onSettings, onAbout,
+  open, view, unreadMessages, onClose, onNavigate, onCreate, onSettings, onAbout,
 }: {
   open: boolean;
   view: View;
   unreadMessages: number;
   onClose: () => void;
   onNavigate: (view: View) => void;
+  onCreate: () => void;
   onSettings: () => void;
   onAbout: () => void;
 }) {
@@ -104,8 +113,9 @@ export function MobileDrawer({
       {open ? (
         <motion.div className="drawer-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
           <motion.aside className="mobile-drawer" initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }} transition={{ type: "spring", stiffness: 360, damping: 34 }} onClick={(event) => event.stopPropagation()}>
-            <div className="drawer-head"><div className="sidebar-logo"><Logo /><div><strong>SHUF</strong><span>Play. Match. Talk.</span></div></div><button className="icon-button" onClick={onClose} aria-label="Close menu"><X size={20} /></button></div>
-            <button className="drawer-profile" onClick={() => { onNavigate("profile"); onClose(); }}><Avatar initials="MA" size="lg" accent={4} /><div><strong>Mahir Aman</strong><span>@mahir · Level 8</span></div><ChevronRight size={18} /></button>
+            <div className="drawer-head"><div className="sidebar-logo"><Logo /><div><strong>SHUF</strong><span>Talk. Connect. Belong.</span></div></div><button className="icon-button" onClick={onClose} aria-label="Close menu"><X size={20} /></button></div>
+            <button className="drawer-profile" onClick={() => { onNavigate("profile"); onClose(); }}><Avatar initials="MA" size="lg" accent={4} /><div><strong>Mahir Aman</strong><span>@mahir · Addis Ababa</span></div><ChevronRight size={18} /></button>
+            <button className="drawer-create" onClick={() => { onCreate(); onClose(); }}><Plus size={18} />Create on Shuf</button>
             <nav className="side-nav">
               {navItems.map(({ id, label, icon: Icon }) => <button key={id} className={cn("side-link", id === view && "active")} onClick={() => { onNavigate(id); onClose(); }}><Icon size={20} /><span>{label}</span>{id === "chat" && unreadMessages ? <b>{unreadMessages}</b> : null}</button>)}
             </nav>
