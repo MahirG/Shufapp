@@ -1,29 +1,42 @@
 # Shuf
 
-Shuf is an interactive social entertainment app that turns matchmaking and audience-panel formats into polished, playable experiences.
+**Shuf — Ethiopia's place to talk, connect and belong.**
 
-## Experiences
+Shuf is a multilingual Ethiopian social network built around community Circles, creator discovery, local conversations, modern messaging and interactive entertainment.
+
+## Social platform
+
+- **Home feed** — multilingual posts from followed creators and joined Circles.
+- **Shuf Circles** — city, campus, career, culture, sport, business and diaspora communities.
+- **Create** — text, compressed photo, voice, poll, event and protected anonymous posts.
+- **Local reactions** — Betam, Awo, Respect, Funny, Interesting and Disagree.
+- **Comments** — conversations with threaded replies and per-comment reactions.
+- **Language controls** — Amharic, Afaan Oromo, Tigrinya and English feed filtering.
+- **Low Data Mode** — pauses large media and reduces visual effects.
+- **Trust tools** — report, mute and block actions plus community moderators and rules.
+- **Creator discovery** — follow verified people and open direct conversations.
+- **Post-to-chat sharing** — send a public post directly into Shuf messaging.
+
+## Interactive entertainment
 
 - **Pop the Balloon** — eliminate five hidden personalities and reveal the final match.
 - **Blind Match** — answer four instinctive questions and receive a compatibility result.
 - **The Panel** — judge five date stories and discover your panel personality.
-- **Messages** — local-first conversations with search, unread states, reactions, emoji, attachments, voice notes, call overlays and conversation controls.
-- **Discover** — search people, follow profiles, filter personalities and join community topics.
-- **Progression** — earn Shuf points, build streaks and unlock achievements.
 
-## Interaction coverage
+These experiences remain opt-in social entertainment and can be shared into the wider Shuf feed and messaging system.
 
-Every visible control is connected to a real frontend behavior: navigation, game state, search, filters, polls, likes, sharing, following, bookmarks, notifications, settings, achievements, messaging or persisted preferences.
+## Messaging
 
-The current chat implementation is local-first and persists in the browser through `localStorage`. It is ready to be connected to a realtime database and authentication layer for production multi-user messaging.
+The current chat experience includes conversation search, unread states, reactions, emoji, attachments, voice notes, call overlays, pin/mute controls and local browser persistence.
 
 ## Stack
 
 - Next.js App Router
-- React + TypeScript
+- React and TypeScript
 - Motion for React
 - Lucide icons
-- Responsive CSS with mobile bottom navigation and desktop app shell
+- Responsive CSS with desktop and mobile app shells
+- Local-first persistence through `localStorage`
 
 ## Run locally
 
@@ -40,3 +53,5 @@ Open `http://localhost:3000`.
 npm run lint
 npm run build
 ```
+
+The frontend is structured so authentication, realtime messaging, media storage, moderation queues and production database services can be connected without rebuilding the interface architecture.
