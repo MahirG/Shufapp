@@ -1,0 +1,50 @@
+/* Shuf Circles — Ethiopian social network layer */
+.social-surface {
+  border: 1px solid var(--line);
+  background: linear-gradient(145deg, rgba(28, 28, 35, .86), rgba(17, 17, 22, .94));
+  box-shadow: 0 18px 54px rgba(0, 0, 0, .18), inset 0 1px 0 rgba(255, 255, 255, .035);
+}
+.social-home { display: flex; flex-direction: column; gap: 30px; }
+.ethiopia-pulse { min-height: 360px; border-radius: 32px; overflow: hidden; position: relative; isolation: isolate; display: grid; grid-template-columns: 1.08fr .92fr; }
+.ethiopia-pulse::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(circle at 78% 45%, rgba(36, 211, 153, .15), transparent 28%), radial-gradient(circle at 83% 15%, rgba(255, 209, 90, .14), transparent 25%), linear-gradient(135deg, rgba(14, 34, 31, .98), rgba(22, 18, 30, .98) 55%, rgba(15, 15, 20, .98)); }
+.ethiopia-pulse::after { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .22; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 34px 34px; mask-image: linear-gradient(90deg, transparent 25%, #000 70%); }
+.pulse-copy { padding: clamp(34px, 5vw, 68px); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.pulse-copy h2 { margin: 18px 0 14px; font-size: clamp(46px, 5.5vw, 76px); line-height: .92; letter-spacing: -.07em; }
+.pulse-copy h2 em { font-style: normal; color: transparent; background: linear-gradient(95deg, #53e3a6, #f6d66f 52%, #ff6fa7); background-clip: text; -webkit-background-clip: text; }
+.pulse-copy > p { max-width: 580px; margin: 0; color: var(--muted); line-height: 1.7; font-size: 15px; }
+.pulse-actions { display: flex; gap: 10px; margin-top: 28px; }
+.pulse-visual { position: relative; min-height: 360px; display: grid; place-items: center; }
+.ethiopia-orbit { position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,.12); }
+.orbit-a { width: 290px; height: 290px; animation: socialSpin 28s linear infinite; }
+.orbit-b { width: 210px; height: 210px; border-style: dashed; animation: socialSpin 20s linear infinite reverse; }
+.pulse-centre { width: 116px; height: 116px; border-radius: 36px; display: grid; place-items: center; align-content: center; font-weight: 950; letter-spacing: .14em; background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.055)); border: 1px solid rgba(255,255,255,.2); box-shadow: 0 28px 70px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.22); backdrop-filter: blur(20px); }
+.pulse-centre small { font-size: 8px; color: #80e8ba; margin-top: 7px; letter-spacing: .2em; }
+.pulse-person { width: 52px; height: 52px; border-radius: 19px; position: absolute; display: grid; place-items: center; font-size: 13px; font-weight: 900; border: 3px solid rgba(15,15,20,.9); box-shadow: 0 12px 28px rgba(0,0,0,.32); }
+.p1 { top: 13%; left: 25%; background: linear-gradient(145deg,#ff8c7c,#d54b78); }
+.p2 { top: 17%; right: 16%; background: linear-gradient(145deg,#b28cff,#6d4ed4); }
+.p3 { bottom: 16%; left: 16%; background: linear-gradient(145deg,#4be0ad,#148668); }
+.p4 { bottom: 12%; right: 24%; background: linear-gradient(145deg,#f2d76d,#b88921); }
+.pulse-topic { position: absolute; padding: 8px 11px; border-radius: 999px; background: rgba(10,10,13,.62); border: 1px solid var(--line); color: var(--muted); font-size: 10px; backdrop-filter: blur(12px); }
+.t1 { left: 9%; top: 43%; }.t2 { right: 6%; top: 48%; }.t3 { bottom: 5%; left: 46%; }
+@keyframes socialSpin { to { transform: rotate(360deg); } }
+
+.feed-control-bar { min-height: 64px; border-radius: 19px; padding: 10px 12px 10px 18px; display: flex; align-items: center; gap: 15px; }
+.feed-control-bar > div:first-child { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.feed-control-bar > div:first-child svg { color: #65dfae; }
+.feed-control-bar > div:first-child strong { font-size: 12px; }
+.language-filter { display: flex; gap: 5px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.language-filter::-webkit-scrollbar { display: none; }
+.language-filter button { border: 0; background: transparent; color: var(--muted); padding: 9px 12px; border-radius: 11px; cursor: pointer; font-size: 11px; white-space: nowrap; transition: .2s ease; }
+.language-filter button:hover, .language-filter button.active { color: white; background: rgba(255,255,255,.075); }
+.low-data-toggle { margin-left: auto; border: 1px solid var(--line); background: rgba(255,255,255,.035); color: var(--muted); height: 40px; border-radius: 12px; padding: 0 12px; display: flex; align-items: center; gap: 7px; cursor: pointer; white-space: nowrap; font-size: 11px; font-weight: 700; }
+.low-data-toggle.active { color: #71e1b3; background: rgba(67,217,149,.1); border-color: rgba(67,217,149,.22); }
+
+.social-section-title { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 14px; }
+.social-section-title span, .rail-title > span { color: #64dfa9; font-size: 9px; letter-spacing: .14em; font-weight: 850; }
+.social-section-title h2 { margin: 4px 0 0; font-size: 21px; letter-spacing: -.035em; }
+.social-section-title > button { border: 0; background: none; color: var(--muted); display: flex; align-items: center; gap: 3px; cursor: pointer; font-size: 11px; }
+.circle-rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(250px, 1fr); gap: 10px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x proximity; scrollbar-width: thin; }
+.circle-mini-card { scroll-snap-align: start; border-radius: 19px; padding: 14px; display: flex; align-items: center; gap: 10px; min-width: 0; }
+.circle-mini-main { flex: 1; min-width: 0; border: 0; background: none; display: flex; align-items: center; gap: 11px; text-align: left; cursor: pointer; }
+.circle-mini-main > div { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.circle-mini-main strong { display: flex; align-items: center; gap: 5px; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
