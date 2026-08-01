@@ -1,0 +1,128 @@
+/* Light theme refinements */
+html[data-shuf-theme="light"] body,
+html[data-shuf-theme="light"] .app-root {
+  background: var(--bg);
+  color: var(--text);
+}
+
+html[data-shuf-theme="light"] .ambient { opacity: 0.3; }
+html[data-shuf-theme="light"] .message-row.mine .message-bubble { color: #fff; }
+html[data-shuf-theme="light"] .interaction-overlay { background: rgba(35, 27, 43, 0.42); }
+html[data-shuf-theme="light"] .toast { color: #fff; background: #21182a; }
+
+/* Responsive messaging */
+@media (max-width: 900px) {
+  .home-chat-teaser { align-items: flex-start; flex-direction: column; }
+  .home-chat-teaser .primary-button { width: 100%; justify-content: center; }
+
+  .content-area.chat-content {
+    height: calc(100dvh - 132px - env(safe-area-inset-bottom));
+    min-height: 520px;
+  }
+
+  .chat-shell { grid-template-columns: 1fr; }
+  .chat-thread, .chat-welcome { display: none; }
+  .chat-shell.has-thread .chat-sidebar { display: none; }
+  .chat-shell.has-thread .chat-thread { display: grid; }
+  .mobile-thread-back { display: grid; }
+
+  .thread-head { min-height: 62px; padding: 8px 10px; }
+  .thread-actions { gap: 2px; }
+  .thread-actions > button,
+  .thread-menu > button { width: 34px; height: 34px; }
+  .messages-scroll { padding: 18px 12px; }
+  .message-cluster { max-width: 82%; }
+  .quick-reactions { display: none; }
+  .composer { padding: 9px 9px max(10px, env(safe-area-inset-bottom)); }
+  .composer-tools button:nth-child(2) { display: none; }
+
+  .interaction-overlay { align-items: end; padding: 10px; }
+  .interaction-modal,
+  .interaction-modal.wide { width: 100%; max-height: 90dvh; border-radius: 22px 22px 14px 14px; }
+}
+
+@media (max-width: 620px) {
+  .home-chat-teaser { padding: 18px; }
+  .chat-teaser-copy { align-items: flex-start; }
+  .teaser-icon { width: 42px; height: 42px; }
+  .achievement-modal-grid,
+  .about-grid { grid-template-columns: 1fr 1fr; }
+  .achievement-modal-grid button { min-height: 136px; }
+
+  .segmented-control button { font-size: 0; }
+  .segmented-control button svg { width: 18px; height: 18px; }
+  .thread-person > span { max-width: 108px; }
+  .thread-actions > button:nth-child(2) { display: none; }
+  .message-bubble { font-size: 11px; }
+  .message-cluster { max-width: 86%; }
+  .composer-tools { display: none; }
+  .composer { grid-template-columns: minmax(0, 1fr) auto; }
+  .emoji-popover { right: -44px; }
+}
+
+/* Element conversions from static cards to active controls */
+.feature-trio button {
+  display: block;
+  min-height: 100%;
+  padding: 20px;
+}
+
+.feature-trio button > span {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 16px;
+  border-radius: 13px;
+  color: var(--violet-2);
+  background: var(--surface-3);
+  place-items: center;
+}
+
+.feature-trio button h3 { margin-bottom: 7px; font-size: 14px; }
+.feature-trio button p { color: var(--muted); font-size: 11px; line-height: 1.55; }
+
+.insight-grid button > span {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  border-radius: 13px;
+  color: var(--violet-2);
+  background: var(--surface-3);
+  place-items: center;
+}
+
+.insight-grid button > div { min-width: 0; }
+.insight-grid button small,
+.insight-grid button strong,
+.insight-grid button p { display: block; }
+.insight-grid button small { color: var(--muted-2); font-size: 8px; font-weight: 900; letter-spacing: 0.09em; }
+.insight-grid button strong { margin-top: 4px; font-size: 13px; }
+.insight-grid button p { margin-top: 4px; color: var(--muted); font-size: 10px; line-height: 1.45; }
+
+.badge-grid button {
+  gap: 5px;
+  min-height: 128px;
+  padding: 16px 10px;
+  text-align: center;
+}
+
+.badge-grid button > span {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 4px;
+  border-radius: 13px;
+  color: var(--muted);
+  background: var(--surface-3);
+  place-items: center;
+}
+
+.badge-grid button.earned > span { color: var(--gold); background: color-mix(in srgb, var(--gold) 11%, var(--surface-3)); }
+.badge-grid button strong { font-size: 10px; }
+.badge-grid button small { color: var(--muted); font-size: 8px; }
+
+.profile-stats button { position: relative; padding: 4px 18px; }
+.profile-stats button:not(:last-child)::after { content: ""; position: absolute; top: 8px; right: 0; bottom: 8px; width: 1px; background: var(--line); }
+.profile-stats button strong { font-size: 18px; }
+.profile-stats button span { margin-top: 2px; color: var(--muted); font-size: 9px; }
